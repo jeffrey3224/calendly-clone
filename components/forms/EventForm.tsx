@@ -16,7 +16,7 @@ import { createEvent, deleteEvent, updateEvent } from "@/server/actions/events";
 import { useRouter } from "next/navigation";
 
 
-export default function Eventform({event}: {
+export default function EventForm({event}: {
   event?: {
     id: string
     name: string
@@ -83,7 +83,7 @@ export default function Eventform({event}: {
               <FormControl>
                   <Input {...field} />
               </FormControl>
-              <FormDescription>The name users will see when boking</FormDescription>
+              <FormDescription>The name users will see when booking</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -169,6 +169,7 @@ export default function Eventform({event}: {
                         startDeleteTransition(async () => {
                           try {
                             await deleteEvent(event.id)
+                            router.push('/events')
                           }
                           catch (error: any) {
                             form.setError("root", {
@@ -176,7 +177,7 @@ export default function Eventform({event}: {
                             })
                           }
                         })
-                      }}>
+                      }}>Delete
                       </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
