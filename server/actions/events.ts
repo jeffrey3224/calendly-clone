@@ -6,7 +6,6 @@ import { eventFormSchema } from "@/schema/events";
 import { auth } from "@clerk/nextjs/server";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import z from "zod";
 
 
@@ -111,4 +110,18 @@ export async function getEvent(userId: string, eventId: string): Promise<EventRo
     and(eq(clerkUserId, userId), eq(id, eventId)),
   })
   return event ?? undefined
+}
+
+export type PublicEvent = Omit<EventRow, "isActive"> & { isActive: true }
+
+
+export async function getPublicEvents(clerkUserId: string): Promise<PublicEvent[]> {
+
+  const events = await db.query.EventTable.findMany({
+    where: ({ clerkUserId: userIdCol, isActive }, {eq, and }) => 
+      and(eq(userIdCol, clerkUserId), eq(isActive, true)),
+    orderBy: ({ name }, { asc, sql }) => asc(sql`lower(${name})`),
+  })
+
+  return events as PublicEvent[]
 }

@@ -39,7 +39,7 @@ export default async function EventsPage() {
               You do not have any events yet. Create your first event to get started!
               <Button className="bg-blue-500 hover:bg-blue-400 text-white py-6 hover:sca;e-110 duration-500 border-b-4 border-blue-700 hover:border-blue-500 rounded-2xl shadow-accent-foreground shadow-2xl text-2xl font-black"
               asChild>
-                <Link href="/events.new">
+                <Link href="/events/new">
                   <CalendarPlus className="mr-4 size-7" /> New Event
                 </Link>
               </Button>
