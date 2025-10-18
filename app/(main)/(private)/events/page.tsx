@@ -15,8 +15,8 @@ export default async function EventsPage() {
   const events = await getEvents(userId)
 
   return (
-    <section className="flex flex-col items-center gap-16 animate-fade-in">
-       <div className="flex gap-4 items-baseline">
+    <section className="flex flex-col items-center gap-8 animate-fade-in">
+       <div className="flex flex-col md:flex-row gap-2 items-center md:gap-6 md:items-baseline">
             <h1 className="text-4xl xl:text-5xl font-black mb-6">
                 Events
             </h1>
@@ -29,7 +29,7 @@ export default async function EventsPage() {
             </Button>
         </div>
         {events.length > 0 ? (
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-10">
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-7">
           {events.map(event => (
             <EventCard key={event.id} {...event} />
           ))}
