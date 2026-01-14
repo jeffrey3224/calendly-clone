@@ -13,30 +13,30 @@ export default function PrivateNavBar() {
   const pathname = usePathname()
 
   return (
-    <nav className="flex justify-between items-center fixed z-50 w-full h-28 bg-gray-200 px-10 gap-4 shadow-2xl mb-28">
-              {/* Logo */}
-              <Link href="/events" className="flex items-center gap-1 hover:scale-120 duration-500 ">
-                <Image
-                  src="/assets/logo.svg"
-                  width={60}
-                  height={60}
-                  alt="Let's talk"
-                />
-              </Link>
+    <nav className="flex justify-between items-center fixed z-50 w-full h-28 bg-gray-200 px-5 md:px-15 gap-4 shadow-lg mb-28">
+        {/* Logo */}
+        <Link href="/events" className="flex items-center gap-1 hover:scale-110 duration-500 ">
+          <Image
+            src="/assets/logo.svg"
+            width={60}
+            height={60}
+            className="w-10 sm:w-15"
+            alt="Let's talk"
+          />
+        </Link>
 
               <section className="sticky top-0 flex justify-between text-black ">
                   <div className="flex flex-1 max-sm:gap-0 sm:gap-6">
                     {PrivateNavLinks.map((item) => {
-                      const isActive = pathname === item.route ||
-                        pathname.startsWith('${item.route}/');
+                      const isActive = pathname.startsWith(item.route);
 
                         return (
                           <Link 
                             href={item.route}
                             key={item.label}
                             className={
-                              cn('flex gap-4 items-center p-4 rounded-lg justify-start hover:scale-120 duration-300 ',
-                            isActive && 'bg-blue-200 rounded-3xl')
+                              cn('flex gap-4 items-center p-3 md:p-4 rounded-lg justify-start hover:scale-110 duration-300 ',
+                            isActive && 'bg-blue-200 rounded-2xl')
                             }>
 
                               <Image

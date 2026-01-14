@@ -55,8 +55,7 @@ type PublicProfileProps = {
       }
 
     return (
-        <div className="max-w-5xl mx-auto p-5">
-
+        <div className="max-w-5xl mx-auto px-5 pb-10">
                 {user?.id === userId && (
                 <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4 font-bold">
                     <Eye className="w-4 h-4" />
@@ -85,7 +84,7 @@ type PublicProfileProps = {
                 Time to meet!
                 </p>
                 <br /> 
-                <p className="w-md">Pick an event and let’s make it official by booking a time.</p>
+                <p className="w-full">Pick an event and let’s make it official by booking a time.</p>
             </div>
 
             {events.length === 0 ? (
@@ -93,7 +92,7 @@ type PublicProfileProps = {
                 No events available at the moment.
                 </div>
             ) : (
-                <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
+                <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">
                 {events.map((event) => (
                     <PublicEventCard key={event.id} {...event} />
                 ))}

@@ -12,7 +12,7 @@ export default async function MainLayout({
   return(
     <main className="relative">
       {user ? <PrivateNavBar /> : <PublicNavBar />}
-    <section className="pt-36">
+    <section className="pt-36 px-5 md:px-7">
       {children}
     </section>
     

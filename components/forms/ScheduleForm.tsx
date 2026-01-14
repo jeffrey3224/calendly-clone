@@ -86,7 +86,7 @@ export function ScheduleForm({
             field.dayOfWeek === day ? (
               <div
                 key={field.id}
-                className="flex items-start gap-2 border p-3 rounded mb-2"
+                className="flex flex-wrap items-start gap-2 border p-2 rounded mb-2"
               >
                 {/* Start Time */}
                 <div className="flex flex-col">
@@ -109,39 +109,40 @@ export function ScheduleForm({
                   )}
                 </div>
 
-                <span className="pt-2">–</span>
+                <span className="font-bold mt-1">–</span>
 
-                {/* End Time */}
-                <div className="flex flex-col">
-                  <input
-                    type="time"
-                    defaultValue={field.endTime}
-                    {...register(`availabilities.${index}.endTime`, {
-                      required: "End time required",
-                    })}
-                    className={`border rounded p-1 w-30 ${
-                      errors.availabilities?.[index]?.endTime
-                        ? "border-red-600"
-                        : "border-gray-300"
-                    }`}
-                  />
-                  {errors.availabilities?.[index]?.endTime && (
-                    <p className="text-red-600 text-xs mt-1">
-                      {errors.availabilities[index].endTime?.message}
-                    </p>
-                  )}
+                {/* End Time grouped with delete button*/}
+                <div className="flex flex-row">
+                  <div className="flex flex-col pr-2">
+                    <input
+                      type="time"
+                      defaultValue={field.endTime}
+                      {...register(`availabilities.${index}.endTime`, {
+                        required: "End time required",
+                      })}
+                      className={`border rounded p-1 w-30 ${
+                        errors.availabilities?.[index]?.endTime
+                          ? "border-red-600"
+                          : "border-gray-300"
+                      }`}
+                    />
+                    {errors.availabilities?.[index]?.endTime && (
+                      <p className="text-red-600 text-xs mt-1">
+                        {errors.availabilities[index].endTime?.message}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Remove */}
+                  <Button
+                    type="button"
+                    variant="destructive"
+                    className="cursor-pointer hover:scale-110 duration-500 h-full"
+                    onClick={() => remove(index)}
+                  >
+                    <X size={16} />
+                  </Button>
                 </div>
-
-                {/* Remove */}
-                <Button
-                  type="button"
-                  variant="destructive"
-                  size="sm"
-                  className="mt-1 cursor-pointer hover:scale-110 duration-500"
-                  onClick={() => remove(index)}
-                >
-                  <X size={16} />
-                </Button>
               </div>
             ) : null
           )}
