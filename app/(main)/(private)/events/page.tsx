@@ -29,7 +29,7 @@ export default async function EventsPage() {
             </Button>
         </div>
         {events.length > 0 ? (
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-7 pb-7">
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pb-7">
           {events.map(event => (
             <EventCard key={event.id} {...event} />
           ))}

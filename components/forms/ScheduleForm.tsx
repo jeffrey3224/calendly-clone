@@ -171,7 +171,7 @@ export function ScheduleForm({
       <button
         type="submit"
         disabled={isSubmitting}
-        className="bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50 mt-6"
+        className="bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50 mt-6 hover:scale-105 duration-150 cursor-pointer"
       >
         Save
       </button>

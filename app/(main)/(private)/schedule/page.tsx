@@ -11,9 +11,9 @@ export default async function SchedulePage() {
   const schedule = await getSchedule(userId)
 
     return (
-            <Card className="max-w-lg mx-auto border-8 border-blue-200 shadow-2xl shadow-accent-foreground">
+            <Card className="max-w-lg mx-auto border-8 border-blue-200 shadow-xl shadow-accent-foreground mb-10">
                 <CardHeader>
-                    <CardTitle>Availabilities</CardTitle> 
+                    <CardTitle className="text-xl">My Availabilities</CardTitle> 
                 </CardHeader>
                 <CardContent>
                 <ScheduleForm
