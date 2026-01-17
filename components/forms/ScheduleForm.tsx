@@ -86,63 +86,71 @@ export function ScheduleForm({
             field.dayOfWeek === day ? (
               <div
                 key={field.id}
-                className="flex flex-wrap items-start gap-2 border p-2 rounded mb-2"
+                className="flex flex-wrap items-start justify-between gap-2 border p-2 rounded mb-2"
               >
-                {/* Start Time */}
-                <div className="flex flex-col">
-                  <input
-                    type="time"
-                    defaultValue={field.startTime}
-                    {...register(`availabilities.${index}.startTime`, {
-                      required: "Start time required",
-                    })}
-                    className={`border rounded p-1 w-30 ${
-                      errors.availabilities?.[index]?.startTime
-                        ? "border-red-600"
-                        : "border-gray-300"
-                    }`}
-                  />
-                  {errors.availabilities?.[index]?.startTime && (
-                    <p className="text-red-600 text-xs mt-1">
-                      {errors.availabilities[index].startTime?.message}
-                    </p>
-                  )}
-                </div>
-
-                <span className="font-bold mt-1">–</span>
-
-                {/* End Time grouped with delete button*/}
-                <div className="flex flex-row">
-                  <div className="flex flex-col pr-2">
+                <div id="time-block" className="flex flex-col sm:flex-row items-start w-[75%] sm:space-x-5">
+                  {/* Start Time */}
+                  <div className="flex flex-col w-full pb-2 sm:w-40">
+                    <label className="text-[.7rem] text-gray-500 pb-1">Start</label>
                     <input
                       type="time"
-                      defaultValue={field.endTime}
-                      {...register(`availabilities.${index}.endTime`, {
-                        required: "End time required",
+                      defaultValue={field.startTime}
+                      {...register(`availabilities.${index}.startTime`, {
+                        required: "Start time required",
                       })}
-                      className={`border rounded p-1 w-30 ${
-                        errors.availabilities?.[index]?.endTime
+                      className={`border rounded p-1 w-full hover:cursor-pointer ${
+                        errors.availabilities?.[index]?.startTime
                           ? "border-red-600"
                           : "border-gray-300"
                       }`}
                     />
-                    {errors.availabilities?.[index]?.endTime && (
+                    {errors.availabilities?.[index]?.startTime && (
                       <p className="text-red-600 text-xs mt-1">
-                        {errors.availabilities[index].endTime?.message}
+                        {errors.availabilities[index].startTime?.message}
                       </p>
                     )}
                   </div>
 
-                  {/* Remove */}
-                  <Button
-                    type="button"
-                    variant="destructive"
-                    className="cursor-pointer hover:scale-110 duration-500 h-full"
-                    onClick={() => remove(index)}
-                  >
-                    <X size={16} />
-                  </Button>
+                  {/* End Time */}
+                  <div className="flex flex-row w-full sm:w-40">
+                    <div className="flex flex-col w-full">
+                      <label className="text-[.7rem] text-gray-500 pb-1">End</label>
+                      <input
+                        type="time"
+                        defaultValue={field.endTime}
+                        {...register(`availabilities.${index}.endTime`, {
+                          required: "End time required",
+                        })}
+                        className={`border rounded p-1 w-full hover:cursor-pointer ${
+                          errors.availabilities?.[index]?.endTime
+                            ? "border-red-600"
+                            : "border-gray-300"
+                        }`}
+                      />
+                      {errors.availabilities?.[index]?.endTime && (
+                        <p className="text-red-600 text-xs mt-1">
+                          {errors.availabilities[index].endTime?.message}
+                        </p>
+                      )}
+                    </div>
+                  </div>
                 </div>
+
+                {/* Remove */}
+                <button className="h-30 sm:h-15 w-10 bg-red-700 flex items-center justify-center cursor-pointer hover:bg-red-800 duration-200" onClick={() => remove(index)}>
+                  <X size={20} color="white"/>
+                </button>
+
+                {/*
+                <Button
+                  type="button"
+                  variant="destructive"
+                  className="cursor-pointer hover:scale-110 duration-500 h-full"
+                  onClick={() => remove(index)}
+                >
+                </Button>
+                */}
+              
               </div>
             ) : null
           )}
