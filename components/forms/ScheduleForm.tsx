@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { DAYS_OF_WEEK_IN_ORDER } from "@/constants";
 import { Button } from "../ui/button";
-import { X, Plus } from "lucide-react";
+import { X, Plus, Trash2 } from "lucide-react";
 import { saveSchedule } from "@/server/actions/schedule";
 
 type Availability = {
@@ -79,22 +79,39 @@ export function ScheduleForm({
 
       {/* Grouped Inputs */}
       {DAYS_OF_WEEK_IN_ORDER.map((day) => (
-        <div key={day} className="mt-4">
-          <h3 className="font-semibold capitalize mb-2">{day}</h3>
+        <div key={day} className="mt-4 max-w-[450px]">
+          <div className="flex flex-row w-full justify-start space-x-3 items-center mb-3">
+            <h3 className="font-semibold capitalize">{day}</h3>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="w-10 cursor-pointer"
+              onClick={() =>
+                append({
+                  dayOfWeek: day,
+                  startTime: "",
+                  endTime: "",
+                })
+              }
+            >
+              <Plus size={16} className="" />
+            </Button>
+          </div>
+          
 
           {fields.map((field, index) =>
             field.dayOfWeek === day ? (
               <div
                 key={field.id}
-                className="flex flex-wrap items-start justify-between gap-2 border p-2 rounded mb-2"
+                className="flex flex-wrap items-start justify-between gap-2 border p-2 rounded mb-2 group hover:cursor-pointer"
               >
-                <div id="time-block" className="flex flex-col sm:flex-row items-start w-[75%] sm:space-x-5">
+                <div id="time-block" className="flex flex-col items-start space-x-5">
                   {/* Start Time */}
-                  <div className="flex flex-col w-full pb-2 sm:w-40">
-                    <label className="text-[.7rem] text-gray-500 pb-1">Start</label>
+                  <div className="flex flex-col w-50 pb-3">
+                    <label htmlFor={`availabilities.${index}.startTime`} className="text-[.7rem] text-gray-500 pb-1">Start</label>
                     <input
                       type="time"
-                      defaultValue={field.startTime}
                       {...register(`availabilities.${index}.startTime`, {
                         required: "Start time required",
                       })}
@@ -112,12 +129,11 @@ export function ScheduleForm({
                   </div>
 
                   {/* End Time */}
-                  <div className="flex flex-row w-full sm:w-40">
+                  <div className="flex flex-row w-50 pb-5">
                     <div className="flex flex-col w-full">
-                      <label className="text-[.7rem] text-gray-500 pb-1">End</label>
+                      <label htmlFor={`availabilities.${index}.endTime`} className="text-[.7rem] text-gray-500 pb-1">End</label>
                       <input
                         type="time"
-                        defaultValue={field.endTime}
                         {...register(`availabilities.${index}.endTime`, {
                           required: "End time required",
                         })}
@@ -134,12 +150,14 @@ export function ScheduleForm({
                       )}
                     </div>
                   </div>
-                </div>
+                
 
-                {/* Remove */}
-                <button className="h-30 sm:h-15 w-10 bg-red-700 flex items-center justify-center cursor-pointer hover:bg-red-800 duration-200" onClick={() => remove(index)}>
-                  <X size={20} color="white"/>
-                </button>
+                  {/* Remove */}
+                  <button type="button" className="flex justify-center items-center bg-red-800 w-28 rounded-sm h-8 duration-200 cursor-pointer text-sm text-white " aria-label={`Delete availability for ${day}`} onClick={() => remove(index)}>
+                    <Trash2 size={15} color="white" className="mr-2"/>
+                    Delete 
+                  </button>
+                </div>
 
                 {/*
                 <Button
@@ -156,22 +174,6 @@ export function ScheduleForm({
           )}
 
           {/* Add Button for This Day */}
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            className="w-28 cursor-pointer"
-            onClick={() =>
-              append({
-                dayOfWeek: day,
-                startTime: "",
-                endTime: "",
-              })
-            }
-          >
-            <Plus size={16} className="mr-1" />
-            Add
-          </Button>
         </div>
       ))}
 
