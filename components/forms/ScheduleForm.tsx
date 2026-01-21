@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { DAYS_OF_WEEK_IN_ORDER } from "@/constants";
 import { Button } from "../ui/button";
@@ -47,6 +47,21 @@ export function ScheduleForm({
     name: "availabilities",
   });
 
+  const [isRow, setIsRow] = useState(false);
+
+  useEffect(() => {
+    const checkSize = () => {
+      const width = window.innerWidth;
+      setIsRow(width >= 375);
+    };
+  
+    checkSize(); 
+    window.addEventListener("resize", checkSize);
+  
+    return () => window.removeEventListener("resize", checkSize);
+  }, []);
+
+
   function onSubmit(data: FormValues) {
     console.log("Submit data:", data);
     saveSchedule(data);
@@ -87,7 +102,7 @@ export function ScheduleForm({
               type="button"
               variant="outline"
               size="sm"
-              className="w-10 cursor-pointer"
+              className={`w-10 cursor-pointer ${fields.some(f => f.dayOfWeek === day) ? "hidden" : ""}`}
               onClick={() =>
                 append({
                   dayOfWeek: day,
@@ -104,9 +119,9 @@ export function ScheduleForm({
             (field, index) =>
               field.dayOfWeek === day && (
                 <div key={field.id} className="border p-3 rounded mb-2 group">
-                  <div className="inline-flex flex-wrap items-end gap-2">
+                  <div className={`relative flex flex-col items-start ${isRow ? "flex-row" : ""} gap-3 sm:gap-5`}>
                     {/* Start */}
-                    <div className="flex flex-col min-w-[150px] max-w-[225px]">
+                    <div className={`flex flex-col ${isRow ? "w-[80%] max-w-[200px]" : "w-full max-w-none"}`}>
                       <label className="text-[.7rem] text-gray-500 pb-1">
                         Start
                       </label>
@@ -129,7 +144,7 @@ export function ScheduleForm({
                     </div>
 
                     {/* End */}
-                    <div className="flex flex-col min-w-[150px] max-w-[225px]">
+                    <div className={`flex flex-col ${isRow ? "w-[80%] max-w-[200px]" : "w-full max-w-none"}`}>
                       <label className="text-[.7rem] text-gray-500 pb-1">End</label>
                       <input
                         type="time"
@@ -153,15 +168,32 @@ export function ScheduleForm({
                     <button
                       type="button"
                       onClick={() => remove(index)}
-                      className="flex items-center justify-center bg-red-800 w-28 h-8 text-sm text-white rounded-sm shrink-0 mt-2"
+                      className="absolute -top-2 -right-2 hover:cursor-pointer"
                     >
-                      <Trash2 size={15} className="mr-2" />
-                      Delete
+                      <X size={22} className="text-gray-400" />
                     </button>
                   </div>
                 </div>
+                
               )
           )}
+          {fields.some(f => f.dayOfWeek === day) && (
+                    <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className={`w-full bg-gray-50 rounded cursor-pointer mx-auto`}
+                    onClick={() =>
+                      append({
+                        dayOfWeek: day,
+                        startTime: "",
+                        endTime: "",
+                      })
+                    }
+                  >
+                    <Plus size={16} />
+                  </Button>
+                  )}
         </div>
       ))}
 

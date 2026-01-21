@@ -13,17 +13,18 @@ export default function PrivateNavBar() {
   const pathname = usePathname()
 
   return (
-    <nav className="flex justify-between items-center fixed z-50 w-full h-28 bg-gray-200 px-5 md:px-15 gap-4 shadow-lg mb-28">
-        {/* Logo */}
-        <Link href="/events" className="flex items-center gap-1 hover:scale-110 duration-500 ">
-          <Image
-            src="/assets/logo.svg"
-            width={60}
-            height={60}
-            className="w-10 sm:w-15"
-            alt="Let's talk"
-          />
-        </Link>
+    <nav className="fixed z-50 w-full h-28 bg-gray-200 px-5 md:px-15 gap-4 shadow-lg mb-28">
+      <div className="mx-auto w-full h-full flex justify-between items-center max-w-[1200px]">
+          {/* Logo */}
+          <Link href="/events" className="flex items-center gap-1 hover:scale-110 duration-500 ">
+            <Image
+              src="/assets/logo.svg"
+              width={60}
+              height={60}
+              className="w-10 sm:w-15"
+              alt="Let's talk"
+            />
+          </Link>
 
               <section className="sticky top-0 flex justify-between text-black ">
                   <div className="flex flex-1 max-sm:gap-0 sm:gap-6">
@@ -64,6 +65,7 @@ export default function PrivateNavBar() {
             </SignedIn>
 
           </div>
+        </div>
     </nav>
   )
 }

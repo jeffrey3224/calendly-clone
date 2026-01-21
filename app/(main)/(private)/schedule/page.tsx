@@ -10,7 +10,7 @@ export default async function SchedulePage() {
   const schedule = await getSchedule(userId)
 
     return (
-            <Card className="max-w-[800px] mx-auto border-8 border-blue-200 shadow-2xl mb-10">
+            <Card className="max-w-[700px] mx-auto border-8 border-blue-200 shadow-2xl mb-10">
                 <CardHeader>
                     <CardTitle className="text-xl">My Availabilities</CardTitle> 
                 </CardHeader>

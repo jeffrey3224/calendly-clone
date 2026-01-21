@@ -20,7 +20,7 @@ export default  function PublicEventCard({
     durationInMinutes,
     }: PublicEventCardProps) {
         return (
-            <Card className="flex flex-col border-4 border-blue-500/10 shadow-2xl transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 hover:cursor-pointer">
+            <Card className="flex flex-col border-4 border-blue-500/10 shadow-2xl transition duration-300 ease-in-out hover:-translate-y-1 hover:cursor-pointer">
               <CardHeader>
                 <CardTitle>{name}</CardTitle>
                 <CardDescription>
