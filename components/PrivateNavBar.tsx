@@ -13,7 +13,7 @@ export default function PrivateNavBar() {
   const pathname = usePathname()
 
   return (
-    <nav className="fixed z-50 w-full h-28 bg-gray-200 px-5 md:px-15 gap-4 shadow-lg mb-28">
+    <nav className="fixed z-50 w-full h-20 md:h-26 bg-gray-200 px-5 md:px-15 gap-4 shadow-lg mb-28">
       <div className="mx-auto w-full h-full flex justify-between items-center max-w-[1200px]">
           {/* Logo */}
           <Link href="/events" className="flex items-center gap-1 hover:scale-110 duration-500 ">
