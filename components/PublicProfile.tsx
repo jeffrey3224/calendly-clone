@@ -55,14 +55,14 @@ type PublicProfileProps = {
       }
 
     return (
-        <div className="mx-auto px-5 pb-10">
+        <div className="mx-auto pb-10">
                 {user?.id === userId && (
-                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4 font-bold">
+                <div className="flex items-center gap-2 text-sm text-gray-700 mb-4 font-bold">
                     <Eye className="w-4 h-4" />
-                    <p>This is how people will see your public profile</p>
+                    <p className="text-[.7rem] md:text-sm">This is how people will see your public profile</p>
                 </div>
                 )}
-            <div className="text-4xl md:text-5xl font-black mb-4 text-center">
+            <div className="text-4xl md:text-5xl md:text-5xl font-black mb-4 text-center">
                 {fullName}
             </div>
 
@@ -79,12 +79,11 @@ type PublicProfileProps = {
                 </div>
             )}
 
-            <div className="text-muted-foreground mb-6 max-w-md mx-auto text-center">
-                <p className="font-bold text-2xl">
+            <div className="text-gray-700 mb-6 max-w-md mx-auto text-center">
+                <p className="font-black text-2xl">
                 Time to meet!
                 </p>
-                <br /> 
-                <p className="w-full">Pick an event and let’s make it official by booking a time.</p>
+                <p className="w-full font-bold">Pick an event and let’s make it official by booking a time.</p>
             </div>
 
             {events.length === 0 ? (
@@ -92,7 +91,7 @@ type PublicProfileProps = {
                 No events available at the moment.
                 </div>
             ) : (
-                <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pb-7">
+                <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pb-7 mx-auto 2xl:grid-cols-6">
                 {events.map((event) => (
                     <PublicEventCard key={event.id} {...event} />
                 ))}

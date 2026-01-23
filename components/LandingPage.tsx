@@ -6,7 +6,7 @@ import Image from "next/image"
 
 export default function LandingPage() {
   return (
-    <main className="flex flex-col min-h-screen p-5 sm:px-15 bg-gradient-to-r from-blue-100 to-blue-300 animate-fade-in">
+    <main className="flex flex-col min-h-screen p-5 sm:px-15 bg-gradient-to-r from-blue-100 to-blue-200 animate-fade-in">
   {/* Logo at the top */}
   <div className="flex justify-center pt-5">
     <Image

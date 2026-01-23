@@ -12,10 +12,9 @@ export default async function MainLayout({
   return(
     <main className="relative">
       {user ? <PrivateNavBar /> : <PublicNavBar />}
-    <section className="pt-36 px-5 md:px-7">
+    <section className="pt-32 md:pt-36 px-5 md:px-7 bg-gradient-to-r from-blue-100 to-blue-200 min-h-screen">
       {children}
     </section>
-    
   </main>
   )
   

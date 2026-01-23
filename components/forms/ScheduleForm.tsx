@@ -98,10 +98,13 @@ export function ScheduleForm({
         <div key={day} className="mt-4">
           <div className="flex flex-row w-full justify-start space-x-3 items-center mb-3">
             <h3 className="font-semibold capitalize">{day}</h3>
+
+            {/* Add time for selected day */}
             <Button
               type="button"
               variant="outline"
               size="sm"
+              aria-label={`Add an availability slot for ${day}`}
               className={`w-10 cursor-pointer ${fields.some(f => f.dayOfWeek === day) ? "hidden" : ""}`}
               onClick={() =>
                 append({
@@ -120,13 +123,15 @@ export function ScheduleForm({
               field.dayOfWeek === day && (
                 <div key={field.id} className="border p-3 rounded mb-2 group">
                   <div className={`relative flex flex-col items-start ${isRow ? "flex-row" : ""} gap-3 sm:gap-5`}>
-                    {/* Start */}
+
+                    {/* Start Time */}
                     <div className={`flex flex-col ${isRow ? "w-[80%] max-w-[200px]" : "w-full max-w-none"}`}>
-                      <label className="text-[.7rem] text-gray-500 pb-1">
+                      <label htmlFor={`start-${field.id}`} className="text-[.7rem] text-gray-500 pb-1">
                         Start
                       </label>
                       <input
                         type="time"
+                        id={`start-${field.id}`}
                         {...register(`availabilities.${index}.startTime`, {
                           required: "Start time required",
                         })}
@@ -143,11 +148,12 @@ export function ScheduleForm({
                       )}
                     </div>
 
-                    {/* End */}
+                    {/* End Time */}
                     <div className={`flex flex-col ${isRow ? "w-[80%] max-w-[200px]" : "w-full max-w-none"}`}>
-                      <label className="text-[.7rem] text-gray-500 pb-1">End</label>
+                      <label htmlFor={`end-${field.id}`} className="text-[.7rem] text-gray-500 pb-1">End</label>
                       <input
                         type="time"
+                        id={`end-${field.id}`}
                         {...register(`availabilities.${index}.endTime`, {
                           required: "End time required",
                         })}
@@ -169,6 +175,7 @@ export function ScheduleForm({
                       type="button"
                       onClick={() => remove(index)}
                       className="absolute -top-2 -right-2 hover:cursor-pointer"
+                      aria-label={`Delete availability slot between ${field.startTime} and ${field.endTime} on ${day}s`}
                     >
                       <X size={22} className="text-gray-400" />
                     </button>
@@ -177,12 +184,14 @@ export function ScheduleForm({
                 
               )
           )}
+          {/* Add additional time slots */}
           {fields.some(f => f.dayOfWeek === day) && (
                     <Button
                     type="button"
                     variant="outline"
                     size="sm"
-                    className={`w-full bg-gray-50 rounded cursor-pointer mx-auto`}
+                    aria-label={`Add an additional availability slot for ${day}`}
+                    className="w-full bg-gray-50 rounded cursor-pointer mx-auto text-gray-500"
                     onClick={() =>
                       append({
                         dayOfWeek: day,
@@ -192,6 +201,7 @@ export function ScheduleForm({
                     }
                   >
                     <Plus size={16} />
+                    Add another time slot
                   </Button>
                   )}
         </div>
@@ -201,7 +211,7 @@ export function ScheduleForm({
       <button
         type="submit"
         disabled={isSubmitting}
-        className="bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50 mt-6 hover:scale-105 duration-150 cursor-pointer"
+        className="bg-blue-400 hover:bg-blue-600 text-white px-4 py-2 rounded-md disabled:bg-gray-200 mt-6 duration-150 hover:scale-105 cursor-pointer"
       >
         Save
       </button>

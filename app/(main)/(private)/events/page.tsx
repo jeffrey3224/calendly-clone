@@ -17,7 +17,7 @@ export default async function EventsPage() {
   return (
     <section className="flex flex-col items-center gap-8 animate-fade-in">
        <div className="flex flex-col md:flex-row gap-2 items-center md:gap-6 md:items-baseline">
-            <h1 className="text-4xl xl:text-5xl font-black mb-4">
+            <h1 className="text-4xl md:text-5xl font-black">
                 Events
             </h1>
             <Button

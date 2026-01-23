@@ -24,7 +24,7 @@ export default function EventCard ({
 }: EventCardProps) {
 
   return (
-    <Card className={cn("flex flex-col border-4 border-blue-500/10 shadow-2xl transition duration-150 ease-in-out hover:-translate-y-1 cursor-pointer", !isActive && " bg-accent border-accent")}>
+    <Card className={cn("flex flex-col shadow-2xl transition duration-150 ease-in-out hover:-translate-y-1 cursor-pointer", !isActive && " bg-accent border-accent")}>
 
       <CardHeader className={cn(!isActive && "opacity-50")}>
         <CardTitle>{name}</CardTitle>

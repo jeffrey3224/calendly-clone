@@ -18,15 +18,17 @@ export default async function EditEventPage({
     if (!event) return <h1>Event not found</h1>
 
     return (
-      <Card className="max-w-md mx-auto border-4 border-blue-100 shadow-2xl shadow-accent-foreground">
-        <CardHeader>
-          <CardTitle>Edit Event</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <EventForm
-            event={{...event, description: event.description || undefined}}
-          />
-        </CardContent>
-      </Card>
+      <div className="pb-10">
+        <Card className="max-w-md mx-auto shadow-2xl">
+          <CardHeader>
+            <CardTitle>Edit Event</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <EventForm
+              event={{...event, description: event.description || undefined}}
+            />
+          </CardContent>
+        </Card>
+      </div>
     )
 }

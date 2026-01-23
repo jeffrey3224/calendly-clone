@@ -48,7 +48,7 @@ export default async function BookingPage({
   }
 
   return (
-    <Card className="max-w-4xl mx-auto border-8 border-blue-200 shadow-2xl shadow-accent-foreground">
+    <Card className="max-w-4xl mx-auto shadow-2xl">
       <CardHeader>
         <CardTitle>
           Book {event.name} with {calendarUser.fullName}
