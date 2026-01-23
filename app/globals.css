@@ -1,12 +1,11 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@theme {
+  --breakpoint-xs: 24rem;
+  };
 
 @custom-variant dark (&:is(.dark *));
-
-@theme {
---breakpoint-xs: 30rem;
-}
 
 @theme inline {
   --color-background: var(--background);
