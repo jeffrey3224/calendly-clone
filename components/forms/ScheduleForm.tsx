@@ -47,20 +47,6 @@ export function ScheduleForm({
     name: "availabilities",
   });
 
-  const [isRow, setIsRow] = useState(false);
-
-  useEffect(() => {
-    const checkSize = () => {
-      const width = window.innerWidth;
-      setIsRow(width >= 375);
-    };
-  
-    checkSize(); 
-    window.addEventListener("resize", checkSize);
-  
-    return () => window.removeEventListener("resize", checkSize);
-  }, []);
-
 
   function onSubmit(data: FormValues) {
     console.log("Submit data:", data);
@@ -122,10 +108,10 @@ export function ScheduleForm({
             (field, index) =>
               field.dayOfWeek === day && (
                 <div key={field.id} className="border p-3 rounded mb-2 group">
-                  <div className={`relative flex flex-col items-start ${isRow ? "flex-row" : ""} gap-3 sm:gap-5`}>
+                  <div className={`relative flex flex-col xs:flex-row items-start gap-3 sm:gap-5`}>
 
                     {/* Start Time */}
-                    <div className={`flex flex-col ${isRow ? "flex-1 min-w-0" : "w-full max-w-none"}`}>
+                    <div className="flex flex-col w-full max-w-none xs:flex-1 xs:min-w-0">
                       <label htmlFor={`start-${field.id}`} className="text-[.7rem] text-gray-500 pb-1">
                         Start
                       </label>
@@ -149,7 +135,7 @@ export function ScheduleForm({
                     </div>
 
                     {/* End Time */}
-                    <div className={`flex flex-col ${isRow ? "flex-1 min-w-0" : "w-full max-w-none"}`}>
+                    <div className={`flex flex-col w-full max-w-none xs:flex-1 xs:min-w-0`}>
                       <label htmlFor={`end-${field.id}`} className="text-[.7rem] text-gray-500 pb-1">End</label>
                       <input
                         type="time"
