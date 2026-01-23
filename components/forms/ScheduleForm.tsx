@@ -125,7 +125,7 @@ export function ScheduleForm({
                   <div className={`relative flex flex-col items-start ${isRow ? "flex-row" : ""} gap-3 sm:gap-5`}>
 
                     {/* Start Time */}
-                    <div className={`flex flex-col ${isRow ? "w-[80%] max-w-[200px]" : "w-full max-w-none"}`}>
+                    <div className={`flex flex-col ${isRow ? "flex-1 max-w-[200px]" : "w-full max-w-none"}`}>
                       <label htmlFor={`start-${field.id}`} className="text-[.7rem] text-gray-500 pb-1">
                         Start
                       </label>
@@ -149,7 +149,7 @@ export function ScheduleForm({
                     </div>
 
                     {/* End Time */}
-                    <div className={`flex flex-col ${isRow ? "w-[80%] max-w-[200px]" : "w-full max-w-none"}`}>
+                    <div className={`flex flex-col ${isRow ? "flex-1 max-w-[200px]" : "w-full max-w-none"}`}>
                       <label htmlFor={`end-${field.id}`} className="text-[.7rem] text-gray-500 pb-1">End</label>
                       <input
                         type="time"
