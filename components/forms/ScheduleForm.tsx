@@ -1,12 +1,13 @@
 "use client";
 
 import { Fragment, useEffect, useState } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { DAYS_OF_WEEK_IN_ORDER } from "@/constants";
 import { Button } from "../ui/button";
 import { X, Plus, Trash2 } from "lucide-react";
 import { saveSchedule } from "@/server/actions/schedule";
 import { toast } from "sonner";
+import TimeSelect from "../TimeSelect";
 
 type Availability = {
   dayOfWeek: (typeof DAYS_OF_WEEK_IN_ORDER)[number];
@@ -111,22 +112,22 @@ export function ScheduleForm({
                   <div className={`relative flex flex-col xs:flex-row items-start gap-3 sm:gap-5`}>
 
                     {/* Start Time */}
-                    <div className="flex flex-col w-full xs:min-w-0 xs:max-w-[180px]">
-                      <label htmlFor={`start-${field.id}`} className="text-[.7rem] text-gray-500 pb-1">
-                        Start
-                      </label>
-                      <input
-                        type="time"
-                        id={`start-${field.id}`}
-                        {...register(`availabilities.${index}.startTime`, {
-                          required: "Start time required",
-                        })}
-                        className={`border rounded p-1 w-full ${
-                          errors.availabilities?.[index]?.startTime
-                            ? "border-red-600"
-                            : "border-gray-300"
-                        }`}
+                    <div className="flex flex-col w-full xs:max-w-[200px]">
+                      <Controller
+                        control={control}
+                        name={`availabilities.${index}.startTime`}
+                        rules={{ required: "Start time required" }}
+                        render={({ field: controllerField }) => (
+                          <TimeSelect
+                            id={`start-${field.id}`}
+                            label="Start"
+                            value={controllerField.value}
+                            onChange={controllerField.onChange}
+                            hasError={!!errors.availabilities?.[index]?.startTime}
+                          />
+                        )}
                       />
+
                       {errors.availabilities?.[index]?.startTime && (
                         <p className="text-red-600 text-xs mt-1">
                           {errors.availabilities[index].startTime?.message}
@@ -135,20 +136,21 @@ export function ScheduleForm({
                     </div>
 
                     {/* End Time */}
-                    <div className={`flex flex-col w-full xs:min-w-0 xs:max-w-[180px]`}>
-                      <label htmlFor={`end-${field.id}`} className="text-[.7rem] text-gray-500 pb-1">End</label>
-                      <input
-                        type="time"
-                        id={`end-${field.id}`}
-                        {...register(`availabilities.${index}.endTime`, {
-                          required: "End time required",
-                        })}
-                        className={`border rounded p-1 w-full ${
-                          errors.availabilities?.[index]?.endTime
-                            ? "border-red-600"
-                            : "border-gray-300"
-                        }`}
-                      />
+                    <div className={`flex flex-col w-full xs:max-w-[200px]`}>
+                      <Controller
+                          control={control}
+                          name={`availabilities.${index}.endTime`}
+                          rules={{ required: "End time required" }}
+                          render={({ field: controllerField }) => (
+                            <TimeSelect
+                              id={`end-${field.id}`}
+                              label="End"
+                              value={controllerField.value}
+                              onChange={controllerField.onChange}
+                              hasError={!!errors.availabilities?.[index]?.endTime}
+                            />
+                          )}
+                        />
                       {errors.availabilities?.[index]?.endTime && (
                         <p className="text-red-600 text-xs mt-1">
                           {errors.availabilities[index].endTime?.message}
@@ -197,7 +199,7 @@ export function ScheduleForm({
       <button
         type="submit"
         disabled={isSubmitting}
-        className="bg-blue-400 hover:bg-blue-600 text-white px-4 py-2 rounded-md disabled:bg-gray-200 mt-6 duration-150 hover:scale-105 cursor-pointer"
+        className="bg-blue-400 hover:bg-blue-600 text-white px-4 py-2 rounded-md disabled:bg-gray-200 mt-3 duration-150 hover:scale-105 cursor-pointer"
       >
         Save
       </button>
