@@ -14,6 +14,7 @@ import { useTransition } from "react";
 import Link from "next/link";
 import { createEvent, deleteEvent, updateEvent } from "@/server/actions/events";
 import { useRouter } from "next/navigation";
+import { NumberInput } from "../NumberInput";
 
 
 export default function EventForm({event}: {
@@ -96,7 +97,12 @@ export default function EventForm({event}: {
                     <FormItem>
                     <FormLabel>Duration</FormLabel>
                     <FormControl>
-                        <Input type="number" {...field} />
+                        <NumberInput
+                          value={field.value}
+                          onChange={field.onChange}
+                          min={1}
+                          max={240}
+                          step={5} />
                     </FormControl>
                     <FormDescription>In minutes</FormDescription>
                     <FormMessage />

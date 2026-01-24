@@ -7,6 +7,32 @@
 
 @custom-variant dark (&:is(.dark *));
 
+select {
+  -webkit-appearance: none; /* remove native style */
+  box-shadow: none;          /* remove Safari shadow */
+  /* Hide Safari / WebKit arrows */
+}
+
+@layer base {
+  /* Remove arrows in Safari/Chrome */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Remove arrows in Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
+
+/* Hide Firefox arrows */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

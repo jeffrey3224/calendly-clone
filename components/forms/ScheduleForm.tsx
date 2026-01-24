@@ -4,7 +4,7 @@ import { Fragment, useEffect, useState } from "react";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { DAYS_OF_WEEK_IN_ORDER } from "@/constants";
 import { Button } from "../ui/button";
-import { X, Plus, Trash2 } from "lucide-react";
+import { X, Plus, Trash2, ChevronDown } from "lucide-react";
 import { saveSchedule } from "@/server/actions/schedule";
 import { toast } from "sonner";
 import TimeSelect from "../TimeSelect";
@@ -58,7 +58,7 @@ export function ScheduleForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       {/* Timezone */}
-      <div>
+      <div className="relative">
         <label htmlFor="timezone" className="block font-semibold mb-1">
           Timezone
         </label>
@@ -75,6 +75,9 @@ export function ScheduleForm({
             </option>
           ))}
         </select>
+        <div className="pointer-events-none absolute right-2 top-10 flex items-center">
+        <ChevronDown size={16} className="text-gray-400" />
+      </div>
         {errors.timezone && (
           <p className="text-red-600 text-sm mt-1">{errors.timezone.message}</p>
         )}

@@ -1,3 +1,5 @@
+import { ChevronDown } from 'lucide-react';
+
 type TimeSelectProps = {
   id: number | string; 
   label: string;
@@ -25,12 +27,12 @@ function format12Hour(time24: string) {
 
 export default function TimeSelect({ id, label, value, onChange, hasError }: TimeSelectProps) {
   return (
-    <div className={`flex flex-col w-full min-w-0 ${hasError ? "border-2 border-red-200" : ""}`}>
+    <div className={`relative flex flex-col w-full min-w-0 ${hasError ? "border-2 border-red-200" : ""}`}>
       <label htmlFor={`start-${id.toString()}`} className="text-[.7rem] text-gray-500 mb-1">{label}</label>
       <select
         value={value || ""}
         onChange={(e) => onChange(e.target.value)}
-        className="border rounded-md px-2 py-2 w-full bg-white text-sm"
+        className="border rounded-md px-2 py-2 w-full bg-white text-[.9rem] h-10"
       >
         <option value="" disabled>
           Select time
@@ -41,6 +43,9 @@ export default function TimeSelect({ id, label, value, onChange, hasError }: Tim
           </option>
         ))}
       </select>
+      <div className="pointer-events-none absolute right-2 top-8 flex items-center">
+        <ChevronDown size={16} className="text-gray-400" />
+      </div>
     </div>
   )
 }
